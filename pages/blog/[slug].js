@@ -2,18 +2,19 @@ import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from 'next-mdx-remote'
 import fs from 'fs'
 import path from 'path'
-import matter from 'gray-matter'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 
 import { Nav, Button } from '../../components'
 
 const components = { Nav, Button, SyntaxHighlighter }
 
-const PostPage = ({ frontMatter: { title, date }, mdxSource }) => {
+const PostPage = ({ serializedContent }) => {
+  const { frontmatter } = serializedContent
+
   return (
     <div className="mt-4">
-      <h1>{title}</h1>
-      <MDXRemote {...mdxSource} components={components}/>
+      <h1>{frontmatter.title}</h1>
+      <MDXRemote {...serializedContent} components={components} />
     </div>
   )
 }
@@ -21,31 +22,36 @@ const PostPage = ({ frontMatter: { title, date }, mdxSource }) => {
 const getStaticPaths = async () => {
   const files = fs.readdirSync(path.join('posts'))
 
-  const paths = files.map(filename => ({
+  const paths = files.map((filename) => ({
     params: {
-      slug: filename.replace('.mdx', '')
-    }
+      slug: filename.split('.')[0],
+    },
   }))
 
   return {
     paths,
-    fallback: false
+    fallback: false,
   }
 }
 
 const getStaticProps = async ({ params: { slug } }) => {
-  const markdownWithMeta = fs.readFileSync(path.join('posts',
-    slug + '.mdx'), 'utf-8')
+  const markdown = fs.readFileSync(path.join('posts', slug + '.mdx'), 'utf-8')
 
-  const { data: frontMatter, content } = matter(markdownWithMeta)
-  const mdxSource = await serialize(content)
+  const serializedContent = await serialize(markdown, {
+    format: 'mdx',
+    parseFrontmatter: true,
+    mdxOptions: {
+      remarkPlugins: [],
+      rehypePlugins: [],
+      useDynamicImport: true,
+    },
+  })
 
   return {
     props: {
-      frontMatter,
       slug,
-      mdxSource
-    }
+      serializedContent,
+    },
   }
 }
 
