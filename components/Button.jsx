@@ -1,9 +1,6 @@
 const Button = ({ text }) => {
   return (
-    <button
-      className="btn btn-primary"
-      onClick={event => event.target.innerText = 'You clicked me!'}
-    >
+    <button className="button" onClick={(event) => (event.target.innerText += '🔥')}>
       {text}
     </button>
   )
