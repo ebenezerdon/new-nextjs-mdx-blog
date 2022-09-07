@@ -1,4 +1,3 @@
-import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from 'next-mdx-remote'
 import fs from 'fs'
 import path from 'path'
@@ -35,15 +34,19 @@ const getStaticPaths = async () => {
 }
 
 const getStaticProps = async ({ params: { slug } }) => {
+  const fs = require('fs')
+  const path = require('path')
+  const { serialize } = require('next-mdx-remote/serialize')
+
   const markdown = fs.readFileSync(path.join('posts', slug + '.mdx'), 'utf-8')
 
   const serializedContent = await serialize(markdown, {
     format: 'mdx',
     parseFrontmatter: true,
+    scope: '', // we can supply variables to the mdx files via scope
     mdxOptions: {
-      remarkPlugins: [],
+      remarkPlugins: [], // plugins like syntax highlighters
       rehypePlugins: [],
-      useDynamicImport: true,
     },
   })
 
