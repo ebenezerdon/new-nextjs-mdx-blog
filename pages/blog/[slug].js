@@ -1,7 +1,9 @@
 import { MDXRemote } from 'next-mdx-remote'
+import { serialize } from 'next-mdx-remote/serialize'
 import fs from 'fs'
 import path from 'path'
 import SyntaxHighlighter from 'react-syntax-highlighter'
+import styles from './post.module.css'
 
 import { Nav, Button } from '../../components'
 
@@ -11,7 +13,7 @@ const PostPage = ({ serializedContent }) => {
   const { frontmatter } = serializedContent
 
   return (
-    <div className="mt-4">
+    <div className={styles.postPage}>
       <h1>{frontmatter.title}</h1>
       <MDXRemote {...serializedContent} components={components} />
     </div>
@@ -34,10 +36,6 @@ const getStaticPaths = async () => {
 }
 
 const getStaticProps = async ({ params: { slug } }) => {
-  const fs = require('fs')
-  const path = require('path')
-  const { serialize } = require('next-mdx-remote/serialize')
-
   const markdown = fs.readFileSync(path.join('posts', slug + '.mdx'), 'utf-8')
 
   const serializedContent = await serialize(markdown, {

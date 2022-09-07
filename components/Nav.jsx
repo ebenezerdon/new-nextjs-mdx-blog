@@ -1,14 +1,15 @@
 import Link from 'next/link'
+import styles from './nav.module.css'
 
 const Nav = () => {
   return (
-    <nav className="nav p-3 border-bottom">
+    <nav className={styles.nav}>
       <Link href="/" passHref>
-        <h2 className="pointer">Ebenezer Don</h2>
+        <a className={styles.home}>My Next.js Blog</a>
       </Link>
 
       <Link href="/bio" passHref>
-        <p className="ms-5 pointer lead my-auto">Bio</p>
+        <a className={styles.bio}>Bio</a>
       </Link>
     </nav>
   )
