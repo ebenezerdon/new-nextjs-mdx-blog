@@ -15,11 +15,11 @@
   text-align: center;
   cursor: pointer;
   box-shadow: 0 0 0.5em #27272733;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .item:hover {
-  box-shadow: 0 0 0.5em #0f0f0f66;
+  transform: scale(1.05);
 }
 
 .title {
@@ -46,9 +46,9 @@
   transition: all 0.3s ease-in-out;
 }
 
-.thumbnail:hover {
+/* .thumbnail:hover {
   transform: scale(1.05);
-}
+} */
 
 .thumbnail img {
   border-radius: 0.2em;

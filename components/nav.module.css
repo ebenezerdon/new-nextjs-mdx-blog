@@ -1,0 +1,21 @@
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 3em;
+  padding: 4em;
+}
+
+.home {
+  font-size: 2em;
+  font-weight: 500;
+}
+
+.bio {
+  font-size: 1.5em;
+  font-weight: 400;
+}
+
+.home:hover,
+.bio:hover {
+  text-decoration: underline;
+}
