@@ -15,7 +15,13 @@ a {
   box-sizing: border-box;
 }
 
-.pointer {
+.button {
+  background: #0051ae;
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em 1em;
+  font-size: 1em;
   cursor: pointer;
 }
 
