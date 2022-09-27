@@ -1,5 +1,7 @@
 ### A Next.js and MDX blog
 
-Tutorial: https://blog.jetbrains.com/webstorm/2021/10/building-a-blog-with-next-js-and-mdx/
+[Complete Next.js Crash Course on YouTube](https://youtu.be/AOQ80BaV_NQ)
 
-Built by [Ebenezer Don on YouTube](https://youtube.com/ebenezerdon)
+Built by [Ebenezer Don on NewDev](https://www.newdev.io/ebenezer)
+
+Please give a star ⭐️ before you fork.
